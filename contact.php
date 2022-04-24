@@ -81,6 +81,8 @@
                 <tbody>
                     <?php
                     $rows = $model->fetch($_SESSION['id']);
+                    if($rows)
+                    {
                     foreach ($rows as $row){
                     ?>
                         <tr>
@@ -95,6 +97,7 @@
                         </tr>
                     <?php
                     }
+                }
                     ?>
                 </tbody>
             </table>

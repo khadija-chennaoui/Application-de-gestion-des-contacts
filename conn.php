@@ -42,8 +42,16 @@ class Model
         $data[] = $row;
        }
     }
-   
+   if($data)
+   {
     return $data;
+   }
+   else
+   {
+     echo '<div class="text-center fs-1 "> <strong>no contact!!!</strong> </div>';
+
+   }
+    
   }
   public function delete($id)
   {
@@ -78,8 +86,8 @@ class Model
   {
     if (isset($_POST['submit'])) {
       $user = $_POST['user'];
-      $pass = $_POST['pass'];
-      $passv = $_POST['passv'];
+      $pass = md5($_POST['pass']);
+      $passv =$_POST['passv'] ;
       $query = "INSERT INTO  sinup VALUES (NULL,'$user','$pass','$passv',sysdate())";
       $sql = $this->conn->query($query);
       header('location:login.php');
@@ -89,7 +97,7 @@ class Model
   {
     if (isset($_POST['submit'])) {
       $user = $_POST['user'];
-      $pass = $_POST['pass'];
+      $pass = md5($_POST['pass']);
       $query = "SELECT * FROM sinup WHERE name = '" . $user . "' AND pass ='" . $pass . "'";
       $sql = $this->conn->query($query);
       $res = $sql->num_rows;

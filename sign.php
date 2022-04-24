@@ -17,6 +17,7 @@
     <?php include('conn.php');
     $model = new Model();
     $insert = $model->signup(); 
+   
    ?>
         <div class="col-5 mx-auto" style="width: 400px;">
             <form class="container-fluid" method="POST" id="form1">
