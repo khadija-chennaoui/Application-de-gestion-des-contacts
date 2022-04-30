@@ -5,7 +5,7 @@ class Model
   private $username = "root";
   private $password = "";
   private $ndb = "contact";
-  private $conn;
+  public $conn;
   public function __construct()
   {
     try {
@@ -20,6 +20,28 @@ class Model
        ";
     }
   }
+  public function fetch($id)
+  {
+
+    $data = null;
+    $query = "SELECT * FROM contc where iduser ='$id'";
+    if ($sql = $this->conn->query($query)) {
+      while ($row = $sql->fetch_assoc()) {
+        $data[] = $row;
+      }
+    }
+    if ($data) {
+      return $data;
+    } else {
+      echo '<div class="text-center fs-1 "> <strong>no contact!!!</strong> </div>';
+    }
+  }
+}
+
+
+class Ajout extends Model
+{
+
   public function insert()
   {
     if (isset($_POST['submit'])) {
@@ -27,31 +49,10 @@ class Model
       $phone = $_POST['phone'];
       $email = $_POST['email'];
       $adrs = $_POST['adrs'];
-      $use=$_SESSION['id'];
+      $use = $_SESSION['id'];
       $query = "INSERT INTO  contc VALUES (NULL,'$nam','$phone','$email','$adrs','$use')";
       $sql = $this->conn->query($query);
     }
-  }
-  public function fetch($id)
-  {
-    
-    $data = null;
-    $query = "SELECT * FROM contc where iduser ='$id'";
-    if($sql = $this->conn->query($query)){
-      while ($row =$sql->fetch_assoc()) {
-        $data[] = $row;
-       }
-    }
-   if($data)
-   {
-    return $data;
-   }
-   else
-   {
-     echo '<div class="text-center fs-1 "> <strong>no contact!!!</strong> </div>';
-
-   }
-    
   }
   public function delete($id)
   {
@@ -82,12 +83,15 @@ class Model
       return false;
     }
   }
+}
+class Connection extends Model
+{
   public function signup()
   {
     if (isset($_POST['submit'])) {
       $user = $_POST['user'];
       $pass = md5($_POST['pass']);
-      $passv =$_POST['passv'] ;
+      $passv = $_POST['passv'];
       $query = "INSERT INTO  sinup VALUES (NULL,'$user','$pass','$passv',sysdate())";
       $sql = $this->conn->query($query);
       header('location:login.php');
@@ -106,7 +110,7 @@ class Model
           session_start();
           $_SESSION['id'] = $rows['id'];
           $_SESSION['name'] = $rows['name'];
-          $_SESSION['date']= date('l j F Y, H:i');
+          $_SESSION['date'] = date('l j F Y, H:i');
           echo $rows['name'];
         }
 
@@ -131,5 +135,4 @@ class Model
     $res = $sql->fetch_assoc();
     echo $res['tempts'];
   }
-  
 }

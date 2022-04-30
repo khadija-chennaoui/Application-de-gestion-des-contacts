@@ -15,7 +15,7 @@
     <?php include('nav.php'); ?>
     <div id="signup">
     <?php include('conn.php');
-    $model = new Model();
+    $model = new Connection();
     $insert = $model->signup(); 
    
    ?>

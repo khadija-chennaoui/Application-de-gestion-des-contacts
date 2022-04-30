@@ -16,7 +16,7 @@
     <div id="login">
         <?php
         include('conn.php');
-        $model = new Model();
+        $model = new Connection();
         $delet = $model->login();
         ?>
         <div class="col-5 mx-auto" style="width: 400px;">

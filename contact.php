@@ -29,7 +29,7 @@
                 <div class="modal-body">
                     <div class="card mt-5 mb-3 pt-3 pb-3  d-block rounded-3 border border-2 border-dark " style="width: 29rem;">
                         <?php include('conn.php');
-                        $model = new Model();
+                        $model = new Ajout();
                         $insert = $model->insert(); ?>
                         <form class="row g-3 mx-2" method="POST" action="contact.php" id="form3">
                             <h3>Add Contact:</h3>
@@ -80,6 +80,7 @@
                 </thead>
                 <tbody>
                     <?php
+                    $model = new Model();
                     $rows = $model->fetch($_SESSION['id']);
                     if($rows)
                     {

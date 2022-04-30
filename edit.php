@@ -17,7 +17,7 @@
     <?php include('navcont.php'); ?>
     <div class="card mt-5 mb-3 pt-3 pb-3 mx-auto d-block rounded-3 border border-2 border-dark " style="width: 29rem;">
                     <?php include('conn.php');
-                        $model = new Model();
+                        $model = new Ajout();
                         $id=$_REQUEST['id'];
                         $row = $model->edit($id);
                         if (isset($_POST['update'])) {

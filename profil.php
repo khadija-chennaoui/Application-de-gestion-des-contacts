@@ -27,7 +27,7 @@
     <tr>
     <th scope="row">Signup date :</th>
       <td><?php include('conn.php');
-        $model = new Model();
+        $model = new Connection();
          $model->Date();
         ?></td>
     </tr>
